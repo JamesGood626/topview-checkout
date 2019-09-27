@@ -59,7 +59,7 @@ import { mapState, mapActions } from 'vuex'
         console.log("what is bikeInCart: ", this.bikeInCart)
         if (this.bikeInCart) {
           this.toggleShowCartItems()
-          this.$router.push(`/checkout`)
+          this.$router.push("/checkout")
         }
       }
     },

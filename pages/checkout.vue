@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import BillingDetailsForm from '@/components/billingDetailsForm'
-  import CardDetailsForm from '@/components/cardDetailsForm'
+  // import BillingDetailsForm from '@/components/billingDetailsForm'
+  // import CardDetailsForm from '@/components/cardDetailsForm'
 
   export default {
     data() {
@@ -24,10 +24,10 @@
         cardDetailsSubmitted: false,
       }
     },
-    components: {
-      BillingDetailsForm,
-      CardDetailsForm
-    },
+    // components: {
+    //   BillingDetailsForm,
+    //   CardDetailsForm
+    // },
     methods: {
       toggleBillingDetailsSubmitted(e, invalid) {
         e.preventDefault()
