@@ -78,7 +78,7 @@ export default {
    },
    leave: function (el, done) {
       const imageContainerTwo = el.querySelector(".product-image")
-      if(imageContainer) {
+      if(imageContainerTwo) {
         TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
       } else {
         done()
