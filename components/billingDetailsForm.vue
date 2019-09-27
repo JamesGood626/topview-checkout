@@ -35,8 +35,8 @@
 <script>
   import { required, minLength } from 'vuelidate/lib/validators'
   import {TweenMax} from "gsap/TweenMax";
-  import Input from './formComponents/Input'
-  import ValidatedInput from './formComponents/validatedInput'
+  import Input from '@/components/formComponents/input'
+  import ValidatedInput from '@/components/formComponents/validatedInput'
 
   export default {
     data() {
