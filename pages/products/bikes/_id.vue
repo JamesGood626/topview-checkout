@@ -2,14 +2,15 @@
 <template>
   <div class="product-main--container">
     <div class="product--container">
-      <ProductDetails v-bind:name="this.bike.name" v-bind:price="this.bike.price" v-bind:inStock="this.inStock" />
-      <ProductSlider v-bind:changeSlide="changeSlide" v-bind:image="this.bike.image"/>
-      <button id="add-to-cart-button">I Want This!</button>
+      <ProductDetails v-bind:name="bike.name" v-bind:price="bike.price" v-bind:inStock="inStock" />
+      <ProductSlider v-bind:changeSlide="changeSlide" v-bind:image="bike.image"/>
+      <button id="add-to-cart-button" @click="addProductToCart(bike)">I Want This!</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import ProductSlider from '@/components/productSlider'
 import ProductDetails from '@/components/productDetails'
 import {TweenMax} from "gsap/TweenMax";
@@ -27,6 +28,13 @@ export default {
     };
   },
   methods: {
+    ...mapActions('cart', [
+      'addProductToCart'
+    ]),
+    // addProductToCart() {
+    //   console.log("the store: ", this.$store)
+    //   this.$store.dispatch('cart/addProductToCart', this.bike)
+    // },
     changeSlide(direction) {
       if (direction === "LEFT") {
         const lessOne = +this.id - 1;
@@ -66,14 +74,27 @@ export default {
    //  TODO: Refactor these out as helper functions since they'll be used in three places.
    //  This will be handled as one of the last things to do. Not top priority
    enter: function (el, done) {
+     // TODO: this.$route.params.id is available in this functions. So use that to determine
+     // the new page, and create some state in vuex for holding the old page; in order to
+     // determine the animation direction.
+     console.log("enter transition firing: ", el)
       const imageContainer = el.querySelector(".product-image")
-      TweenMax.fromTo(imageContainer, 0.3, {x: '-300px', opacity: 0}, {x: '0px', opacity: 1, onComplete: done});
+      if(imageContainer) {
+        TweenMax.fromTo(imageContainer, 0.3, {x: '-300px', opacity: 0}, {x: '0px', opacity: 1, onComplete: done});
+      } else {
+        done()
+      }
    },
    leave: function (el, done) {
+     console.log("leave transition firing: ", el)
       const imageContainerTwo = el.querySelector(".product-image")
-      TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
+      if(imageContainerTwo) {
+        TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
+      } else {
+        done()
+      }
    },
-}
+  }
 };
 </script>
 

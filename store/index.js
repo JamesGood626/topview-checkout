@@ -12,7 +12,7 @@ const createStore = () => {
       updatePage(state, pageName) {
         state.page = pageName;
       }
-    }
+    },
   });
 };
 

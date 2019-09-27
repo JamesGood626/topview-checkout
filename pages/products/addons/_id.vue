@@ -4,12 +4,13 @@
     <div class="product--container">
       <ProductDetails v-bind:name="addon.name" v-bind:price="addon.price" v-bind:inStock="this.inStock" />
       <ProductSlider v-bind:changeSlide="changeSlide" v-bind:image="addon.image"/>
-      <button id="add-to-cart-button">I Want This!</button>
+      <button id="add-to-cart-button" @click="addProductToCart(addon)">I Want This!</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import ProductSlider from '@/components/productSlider'
 import ProductDetails from '@/components/productDetails'
 import {TweenMax} from "gsap/TweenMax";
@@ -26,16 +27,24 @@ export default {
     };
   },
   methods: {
+    ...mapActions('cart', [
+      'addProductToCart'
+    ]),
     changeSlide(direction) {
+      if (this.addonList.length === 1) {
+        return
+      }
       if (direction === "LEFT") {
         const lessOne = +this.id - 1;
-        const nextPage = lessOne > 0 ? lessOne : this.listLength;
-        this.$router.push(`/products/addon/${nextPage}`)
+        const { start, end } = this.listRange
+        const nextPage = lessOne > start ? lessOne : end;
+        this.$router.push(`/products/addons/${nextPage}`)
       }
       if (direction === "RIGHT") {
         const plusOne = +this.id + 1;
-        const nextPage = plusOne <= this.listLength ? plusOne : 1
-        this.$router.push(`/products/addons/${nextPage }`)
+        const { start, end } = this.listRange
+        const nextPage = plusOne <= end ? plusOne : start
+        this.$router.push(`/products/addons/${nextPage}`)
       }
     }
   },
@@ -43,8 +52,9 @@ export default {
     inStock() {
       return this.addon.inventory > 0
     },
-    listLength() {
-      return this.addonList.length;
+    listRange() {
+      const { addonList } = this
+      return {start: addonList[0].id, end: addonList[addonList.length - 1].id}
     },
     addonList() {
       return this.$store.getters["products/addonList"];
@@ -61,11 +71,19 @@ export default {
    //  This will be handled as one of the last things to do. Not top priority
    enter: function (el, done) {
       const imageContainer = el.querySelector(".product-image")
-      TweenMax.fromTo(imageContainer, 0.3, {x: '-300px', opacity: 0}, {x: '0px', opacity: 1, onComplete: done});
+      if(imageContainer) {
+        TweenMax.fromTo(imageContainer, 0.3, {x: '-300px', opacity: 0}, {x: '0px', opacity: 1, onComplete: done});
+      } else {
+        done()
+      }
    },
    leave: function (el, done) {
       const imageContainerTwo = el.querySelector(".product-image")
-      TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
+      if(imageContainerTwo) {
+        TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
+      } else {
+        done()
+      }
    },
 }
 };

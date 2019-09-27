@@ -73,7 +73,6 @@
 #product-name {
   font-size: 1.4rem;
   font-family: 'Arimo', sans-serif;
-  /* margin-bottom: 1.4rem; */
   /* background: lime; */
 }
 

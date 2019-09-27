@@ -79,11 +79,16 @@ const actions = {
 // mutations
 const mutations = {
   setProducts(state, products) {
-    state.all = products;
+    state.list = products;
+  },
+
+  incrementProductInventory(state, { id }) {
+    const product = state.list.find(product => product.id === id);
+    product.inventory++;
   },
 
   decrementProductInventory(state, { id }) {
-    const product = state.all.find(product => product.id === id);
+    const product = state.list.find(product => product.id === id);
     product.inventory--;
   }
 };

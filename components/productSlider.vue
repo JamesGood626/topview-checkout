@@ -67,6 +67,7 @@
 
 svg:hover {
   cursor: pointer;
+  fill: red;
 }
 
 @media only screen and (min-width: 375px) {

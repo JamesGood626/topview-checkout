@@ -14,7 +14,6 @@ export default {
   head () {
     return {
       link: [
-        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap' },
         {rel: 'stylesheet', href: "https://fonts.googleapis.com/css?family=Arimo&display=swap"}
       ]
     }

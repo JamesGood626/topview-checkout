@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "gsap": "^2.1.3",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.27",
