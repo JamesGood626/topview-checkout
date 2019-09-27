@@ -36,7 +36,7 @@ export default {
         const { start, end } = this.listRange
         console.log(`The start: ${start} & The end: ${end}`)
         console.dir(start)
-        const nextPage = lessOne > start ? lessOne : end;
+        const nextPage = lessOne >= start ? lessOne : end;
         this.$router.push(`/products/accessories/${nextPage}`)
       }
       if (direction === "RIGHT") {

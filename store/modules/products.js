@@ -54,15 +54,12 @@ const state = {
 // getters
 const getters = {
   bikeList() {
-    console.log("bikeList running");
     return state.list.filter(({ product_type }) => product_type === "bike");
   },
   accessoryList() {
-    console.log("accessoryList running");
     return state.list.filter(({ product_type }) => product_type === "accessory");
   },
   addonList() {
-    console.log("addonList running");
     return state.list.filter(({ product_type }) => product_type === "addon");
   },
 };

@@ -31,17 +31,13 @@ export default {
     ...mapActions('cart', [
       'addProductToCart'
     ]),
-    // addProductToCart() {
-    //   console.log("the store: ", this.$store)
-    //   this.$store.dispatch('cart/addProductToCart', this.bike)
-    // },
     changeSlide(direction) {
       if (direction === "LEFT") {
         const lessOne = +this.id - 1;
         const { start, end } = this.listRange
         console.log(`The start: ${start} & The end: ${end}`)
         console.dir(start)
-        const nextPage = lessOne > start ? lessOne : end;
+        const nextPage = lessOne >= start ? lessOne : end;
         this.$router.push(`/products/bikes/${nextPage}`)
       }
       if (direction === "RIGHT") {

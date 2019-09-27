@@ -37,7 +37,7 @@ export default {
       if (direction === "LEFT") {
         const lessOne = +this.id - 1;
         const { start, end } = this.listRange
-        const nextPage = lessOne > start ? lessOne : end;
+        const nextPage = lessOne >= start ? lessOne : end;
         this.$router.push(`/products/addons/${nextPage}`)
       }
       if (direction === "RIGHT") {

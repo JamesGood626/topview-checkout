@@ -1,8 +1,7 @@
 // See example getters, actions, and mutations here:
 // https://github.com/vuejs/vuex/blob/dev/examples/shopping-cart/store/modules/cart.js
 const state = {
-  items: [],
-  checkoutStatus: null
+  items: []
 };
 
 // getters
@@ -31,25 +30,7 @@ const getters = {
 
 // actions
 const actions = {
-  checkout({ commit, state }, products) {
-    const savedCartItems = [...state.items];
-    commit("setCheckoutStatus", null);
-    // empty cart
-    commit("setCartItems", { items: [] });
-    shop.buyProducts(
-      products,
-      () => commit("setCheckoutStatus", "successful"),
-      () => {
-        commit("setCheckoutStatus", "failed");
-        // rollback to the cart saved before sending the request
-        commit("setCartItems", { items: savedCartItems });
-      }
-    );
-  },
-
   addProductToCart({ state, commit }, product) {
-    // commit("setCheckoutStatus", null);
-    console.log("adding product: ", product)
     if (product.inventory > 0) {
       const cartItem = state.items.find(item => item.id === product.id);
       if (!cartItem) {
@@ -134,10 +115,6 @@ const mutations = {
   setCartItems(state, { items }) {
     state.items = items;
   },
-
-  setCheckoutStatus(state, status) {
-    state.checkoutStatus = status;
-  }
 };
 
 export default {

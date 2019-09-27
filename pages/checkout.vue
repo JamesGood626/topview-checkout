@@ -39,6 +39,20 @@
         if(invalid) return
         this.cardDetailsSubmitted = !this.cardDetailsSubmitted
       }
+    },
+    transition: {
+      mode: 'out-in',
+      css: false,
+      //  TODO: Refactor these out as helper functions since they'll be used in three places.
+      //  This will be handled as one of the last things to do. Not top priority
+      enter: function (el, done) {
+          console.log("checkout enter transition firing: ")
+          done()
+      },
+      leave: function (el, done) {
+          console.log("checkout leave transition firing: ")
+          done()
+      },
     }
   }
 </script>
