@@ -16,6 +16,16 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
+  generate: {
+    routes: [
+      '/products/bikes/1',
+      '/products/bikes/2',
+      '/products/bikes/3',
+      '/products/accessories/4',
+      '/products/accessories/5',
+      '/products/addons/6',
+    ]
+  },
   /*
    ** Customize the progress-bar color
    */
