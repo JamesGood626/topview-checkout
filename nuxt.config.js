@@ -22,6 +22,7 @@ export default {
   generate: {
     fallback: true,
     routes: [
+      '/checkout',
       '/products/bikes/1',
       '/products/bikes/2',
       '/products/bikes/3',
