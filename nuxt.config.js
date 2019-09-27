@@ -14,9 +14,13 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    // link: [{ rel: "icon", type: "image/x-icon", href: "~/favicon.ico" }]
   },
+  // router: {
+  //   base: "/"
+  // },
   generate: {
+    fallback: true,
     routes: [
       '/products/bikes/1',
       '/products/bikes/2',
@@ -29,7 +33,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: { color: "#222" },
   /*
    ** Global CSS
    */
@@ -56,7 +60,10 @@ export default {
      ** You can extend webpack config here
      */
     // extend(config, ctx) {}
-    extend: (config) => {
+    extend: (config, {isDev}) => {
+      if (!isDev) {
+        config.output.publicPath = './_nuxt/'
+      }
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/;
