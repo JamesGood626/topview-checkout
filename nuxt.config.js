@@ -19,10 +19,24 @@ export default {
   // router: {
   //   base: "/"
   // },
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        path: '/checkout',
+        components: {
+          default: resolve(__dirname, 'pages/checkout'), // or routes[index].component
+          billingDetailsForm: resolve(__dirname, 'components/billingDetailsForm.vue'),
+          cardDetailsForm: resolve(__dirname, 'components/cardDetailsForm.vue')
+        },
+        chunkNames: {
+          billingDetailsForm: 'components/billingDetailsForm',
+          cardDetailsForm: 'components/cardDetailsForm'
+        }
+      })
+    }
   generate: {
     fallback: true,
     routes: [
-      '/checkout',
       '/products/bikes/1',
       '/products/bikes/2',
       '/products/bikes/3',
