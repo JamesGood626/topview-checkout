@@ -25,7 +25,8 @@
         </div>
         <!-- TODO: if button is clicked and no bike is selected.
         A message will pop up -->
-        <button id="cart-checkout-btn" @click="this.checkout">Checkout</button>
+        <!-- <button id="cart-checkout-btn" @click="this.checkout">Checkout</button> -->
+        <button id="cart-checkout-btn"><nuxt-link to="/checkout">Checkout</nuxt-link></button>
       </div>
     </transition>
     <transition name="slide-in">
@@ -56,11 +57,11 @@ import { mapState, mapActions } from 'vuex'
         'decrementCartProductQuantity'
       ]),
       checkout() {
-        console.log("what is bikeInCart: ", this.bikeInCart)
-        if (this.bikeInCart) {
-          this.toggleShowCartItems()
-          this.$router.push("/checkout")
-        }
+        // console.log("what is bikeInCart: ", this.bikeInCart)
+        // if (this.bikeInCart) {
+        //   this.toggleShowCartItems()
+        //   this.$router.push("/checkout")
+        // }
       }
     },
     computed: {

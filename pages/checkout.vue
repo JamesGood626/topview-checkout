@@ -43,23 +43,23 @@
       //  TODO: Refactor these out as helper functions since they'll be used in three places.
       //  This will be handled as one of the last things to do. Not top priority
       enter: function (el, done) {
-          console.log("checkout enter transition firing: ")
-          done()
+        console.log("checkout enter transition firing: ")
+        done()
       },
       leave: function (el, done) {
-          console.log("checkout leave transition firing: ")
-          done()
+        console.log("checkout leave transition firing: ")
+        done()
       },
     }
   }
 </script>
 
 <style>
-.checkout--container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 3rem;
-}
+  .checkout--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+  }
 </style>
