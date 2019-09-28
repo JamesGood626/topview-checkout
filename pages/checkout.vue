@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="checkout--container">
+  <div class="checkout--container">
     <div v-if="!billingDetailsSubmitted || !cardDetailsSubmitted">
       <BillingDetailsForm v-bind:billingDetailsSubmitted="billingDetailsSubmitted" v-bind:toggleBillingDetailsSubmitted="toggleBillingDetailsSubmitted"/>
       <CardDetailsForm v-if="billingDetailsSubmitted && !cardDetailsSubmitted" v-bind:toggleCardDetailsSubmitted="toggleCardDetailsSubmitted"/>
@@ -7,15 +7,12 @@
     <div v-else>
       <h1>Checkout Success!</h1>
     </div>
-  </div> -->
-  <div>
-    <h1>The checkout page!</h1>
   </div>
 </template>
 
 <script>
-  // import BillingDetailsForm from '@/components/billingDetailsForm'
-  // import CardDetailsForm from '@/components/cardDetailsForm'
+  import BillingDetailsForm from '@/components/billingDetailsForm'
+  import CardDetailsForm from '@/components/cardDetailsForm'
 
   export default {
     data() {
@@ -24,10 +21,10 @@
         cardDetailsSubmitted: false,
       }
     },
-    // components: {
-    //   BillingDetailsForm,
-    //   CardDetailsForm
-    // },
+    components: {
+      BillingDetailsForm,
+      CardDetailsForm
+    },
     methods: {
       toggleBillingDetailsSubmitted(e, invalid) {
         e.preventDefault()
