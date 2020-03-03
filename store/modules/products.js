@@ -28,7 +28,7 @@ const state = {
       id: 4,
       name: "Adult Unisex Helmet",
       price: 7.99,
-      image: "http://via.placeholder.com/250x250?text=Adult%20Unisex%20Helmet",
+      image: "https://topview-assets.s3.amazonaws.com/daft_punk_helmet.png",
       product_type: "accessory",
       inventory: 12
     },
@@ -57,11 +57,13 @@ const getters = {
     return state.list.filter(({ product_type }) => product_type === "bike");
   },
   accessoryList() {
-    return state.list.filter(({ product_type }) => product_type === "accessory");
+    return state.list.filter(
+      ({ product_type }) => product_type === "accessory"
+    );
   },
   addonList() {
     return state.list.filter(({ product_type }) => product_type === "addon");
-  },
+  }
 };
 
 // actions

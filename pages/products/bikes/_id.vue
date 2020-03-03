@@ -3,17 +3,17 @@
   <div class="product-main--container">
     <div class="product--container">
       <ProductDetails v-bind:name="bike.name" v-bind:price="bike.price" v-bind:inStock="inStock" />
-      <ProductSlider v-bind:changeSlide="changeSlide" v-bind:image="bike.image"/>
+      <ProductSlider v-bind:changeSlide="changeSlide" v-bind:image="bike.image" />
       <button id="add-to-cart-button" @click="addProductToCart(bike)">I Want This!</button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import ProductSlider from '@/components/productSlider'
-import ProductDetails from '@/components/productDetails'
-import {TweenMax} from "gsap/TweenMax";
+import { mapState, mapActions } from "vuex";
+import ProductSlider from "@/components/productSlider";
+import ProductDetails from "@/components/productDetails";
+import { TweenMax } from "gsap/TweenMax";
 
 export default {
   // TODO: Will slots help me reduce some duplication since I need three of these?
@@ -28,33 +28,31 @@ export default {
     };
   },
   methods: {
-    ...mapActions('cart', [
-      'addProductToCart'
-    ]),
+    ...mapActions("cart", ["addProductToCart"]),
     changeSlide(direction) {
       if (direction === "LEFT") {
         const lessOne = +this.id - 1;
-        const { start, end } = this.listRange
-        console.log(`The start: ${start} & The end: ${end}`)
-        console.dir(start)
+        const { start, end } = this.listRange;
+        console.log(`The start: ${start} & The end: ${end}`);
+        console.dir(start);
         const nextPage = lessOne >= start ? lessOne : end;
-        this.$router.push(`/products/bikes/${nextPage}`)
+        this.$router.push(`/products/bikes/${nextPage}`);
       }
       if (direction === "RIGHT") {
         const plusOne = +this.id + 1;
-        const { start, end } = this.listRange
-        const nextPage = plusOne <= end ? plusOne : start
-        this.$router.push(`/products/bikes/${nextPage }`)
+        const { start, end } = this.listRange;
+        const nextPage = plusOne <= end ? plusOne : start;
+        this.$router.push(`/products/bikes/${nextPage}`);
       }
     }
   },
   computed: {
     inStock() {
-      return this.bike.inventory > 0
+      return this.bike.inventory > 0;
     },
     listRange() {
-      const { bikeList } = this
-      return {start: bikeList[0].id, end: bikeList[bikeList.length - 1].id}
+      const { bikeList } = this;
+      return { start: bikeList[0].id, end: bikeList[bikeList.length - 1].id };
     },
     bikeList() {
       return this.$store.getters["products/bikeList"];
@@ -65,31 +63,41 @@ export default {
   },
   // https://nuxtjs.org/api/pages-transition#the-transition-property
   transition: {
-   mode: 'out-in',
-   css: false,
-   //  TODO: Refactor these out as helper functions since they'll be used in three places.
-   //  This will be handled as one of the last things to do. Not top priority
-   enter: function (el, done) {
-     // TODO: this.$route.params.id is available in this functions. So use that to determine
-     // the new page, and create some state in vuex for holding the old page; in order to
-     // determine the animation direction.
-     console.log("enter transition firing: ", el)
-      const imageContainer = el.querySelector(".product-image")
-      if(imageContainer) {
-        TweenMax.fromTo(imageContainer, 0.3, {x: '-300px', opacity: 0}, {x: '0px', opacity: 1, onComplete: done});
+    mode: "out-in",
+    css: false,
+    //  TODO: Refactor these out as helper functions since they'll be used in three places.
+    //  This will be handled as one of the last things to do. Not top priority
+    enter: function(el, done) {
+      // TODO: this.$route.params.id is available in this functions. So use that to determine
+      // the new page, and create some state in vuex for holding the old page; in order to
+      // determine the animation direction.
+      console.log("enter transition firing: ", el);
+      const imageContainer = el.querySelector(".product-image");
+      if (imageContainer) {
+        TweenMax.fromTo(
+          imageContainer,
+          0.3,
+          { x: "-300px", opacity: 0 },
+          { x: "0px", opacity: 1, onComplete: done }
+        );
       } else {
-        done()
+        done();
       }
-   },
-   leave: function (el, done) {
-     console.log("leave transition firing: ", el)
-      const imageContainerTwo = el.querySelector(".product-image")
-      if(imageContainerTwo) {
-        TweenMax.fromTo(imageContainerTwo, 0.3, {x: '0px', opacity: 1}, {x: '300px', opacity: 0, onComplete: done});
+    },
+    leave: function(el, done) {
+      console.log("leave transition firing: ", el);
+      const imageContainerTwo = el.querySelector(".product-image");
+      if (imageContainerTwo) {
+        TweenMax.fromTo(
+          imageContainerTwo,
+          0.3,
+          { x: "0px", opacity: 1 },
+          { x: "300px", opacity: 0, onComplete: done }
+        );
       } else {
-        done()
+        done();
       }
-   },
+    }
   }
 };
 </script>
